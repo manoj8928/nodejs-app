@@ -8,11 +8,23 @@ variable "region" {
   default = "eu-central-1"
 }
 
-variable "container_memory" {}
+variable "container_memory" {
+  description = "(Required) Provide memory for the container to run"
+  type        = string
+  default     = "2048"
+}
 
-variable "container_cpu" {}
+variable "container_cpu" {
+  description = "(Required) Provide CPU for the container to run"
+  type        = string
+  default     = "1024"
+}
 
-variable "image" {}
+variable "image" {
+  description = "(Required) Provide application image path"
+  type        = string
+  default     = "manoj1992/nodejsapp"
+}
 
 variable "access_logs_config" {
   description = "The name of the S3 bucket to store access logs."
