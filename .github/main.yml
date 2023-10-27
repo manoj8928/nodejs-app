@@ -1,0 +1,28 @@
+name: Node.js CI/CD
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Test (you can add tests here if you have any)
+      run: echo "No tests specified"
+
+    # Here you can add any other CI steps like linting, testing etc.
+
+    # Make sure you have your AWS credentials setup for this step
