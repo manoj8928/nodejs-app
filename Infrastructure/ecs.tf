@@ -36,24 +36,6 @@ resource "aws_cloudwatch_log_group" "ecs_logs" {
   retention_in_days = 14
 }
 
-
-# Fetch the private subnet IDs
-data "aws_subnet" "private_subnet1" {
-  filter {
-    name   = "tag:Name"
-    values = ["${var.app_name}-vpc-private-eu-central-1a"]
-  }
-   depends_on = [module.demo_vpc]
-}
-
-data "aws_subnet" "private_subnet2" {
-  filter {
-    name   = "tag:Name"
-    values = ["${var.app_name}-vpc-private-eu-central-1b"]
-  }
-   depends_on = [module.demo_vpc]
-}
-
 # Define the ECS service
 resource "aws_ecs_service" "demo_service" {
   name            = "${var.app_name}-service"
@@ -68,7 +50,7 @@ resource "aws_ecs_service" "demo_service" {
 
   network_configuration {
     security_groups = [aws_security_group.ecs_sg.id]
-    subnets         = [data.aws_subnet.private_subnet1.id, data.aws_subnet.private_subnet2.id]
+    subnets         = [module.demo_vpc.private_subnets]
   }
 
   load_balancer {

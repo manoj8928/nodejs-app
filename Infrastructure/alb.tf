@@ -1,17 +1,3 @@
-# Get subnets ids using filter expression
-data "aws_subnets" "alb" {
-  filter {
-    name   = "vpc-id"
-    values = [module.demo_vpc.vpc_id]
-  }
-
-  filter {
-    name   = "tag:Name"
-    values = [var.alb_type == false ? "*public*" : "*private*"]
-  }
-   depends_on = [module.demo_vpc]
-}
-
 #Application load balancer for ECS Service
 
 resource "aws_lb" "this" {
@@ -21,7 +7,7 @@ resource "aws_lb" "this" {
   ip_address_type            = "ipv4"
   drop_invalid_header_fields = true
   security_groups            = [aws_security_group.alb.id]
-  subnets                    = data.aws_subnets.alb.ids
+  subnets                    = module.demo_vpc.public_subnets
   tags                       = local.tags
 
   dynamic "access_logs" {
