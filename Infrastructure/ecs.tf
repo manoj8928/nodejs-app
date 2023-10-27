@@ -50,7 +50,7 @@ resource "aws_ecs_service" "demo_service" {
 
   network_configuration {
     security_groups = [aws_security_group.ecs_sg.id]
-    subnets         = [module.demo_vpc.private_subnets]
+    subnets         = slice(module.demo_vpc.private_subnets, 0, 2)
   }
 
   load_balancer {
