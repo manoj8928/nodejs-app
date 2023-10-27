@@ -21,15 +21,6 @@ resource "aws_ecs_task_definition" "task" {
   tags                     = local.tags
 }
 
-# Fetch VPC ID
-data "aws_vpc" "this" {
-  filter {
-    name   = "tag:Name"
-    values = [var.app_name]
-  }
-   depends_on = [module.demo_vpc]
-}
-
 # Fetch the private subnet IDs
 data "aws_subnet" "private_subnet1" {
   filter {
