@@ -1,5 +1,8 @@
 data "aws_caller_identity" "current" {}
 
+data "aws_region" "current" {}
+
+
 resource "aws_iam_role" "ecs_task_execution_role" {
   name = "${var.app_name}-task-execution-role"
 
@@ -34,7 +37,7 @@ data "aws_iam_policy_document" "dynamodb_demo_policy_doc" {
       "dynamodb:Scan"
     ]
 
-    resources = ["arn:aws:dynamodb:${var.aws_region}:${data.aws_caller_identity.current.account_id}:table/${var.app_name}"]
+    resources = ["arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${var.app_name}"]
   }
 }
 
