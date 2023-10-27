@@ -1,5 +1,5 @@
 # Define the task definition
-resource "aws_ecs_task_definition" "${var.app_name}" {
+resource "aws_ecs_task_definition" "task" {
   family = "${var.app_name}-task"
   cpu    = var.container_cpu
   memory = var.container_memory
@@ -45,10 +45,10 @@ data "aws_subnet" "private_subnet2" {
 }
 
 # Define the ECS service
-resource "aws_ecs_service" "${var.app_name}_service" {
+resource "aws_ecs_service" "demo_service" {
   name            = "${var.app_name}-service"
-  cluster         = aws_ecs_cluster.${var.app_name}.id
-  task_definition = aws_ecs_task_definition.${var.app_name}.arn
+  cluster         = aws_ecs_cluster.demo.id
+  task_definition = aws_ecs_task_definition.task.arn
   desired_count   = 1
   launch_type     = "FARGATE"
 

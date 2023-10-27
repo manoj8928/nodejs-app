@@ -32,7 +32,7 @@ resource "aws_ecs_cluster_capacity_providers" "demo" {
 #ECR repository for ECS
 
 resource "aws_ecr_repository" "ecr" {
-  name                 = ${var.app_name}
+  name                 = var.app_name
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {

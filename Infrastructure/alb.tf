@@ -56,7 +56,6 @@ resource "aws_lb_listener" "http" {
   }
 tags = local.tags
   }
-}
 
 #Will comment this since we dont have ssl certificate however recommended for production environment 
 
