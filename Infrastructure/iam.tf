@@ -50,7 +50,7 @@ resource "aws_iam_policy" "dynamodb_demo_policy" {
 
 resource "aws_iam_role_policy_attachment" "demo_policy_attachment" {
   policy_arn = aws_iam_policy.dynamodb_demo_policy.arn
-  role       = aws_iam_role.ecs_task_execution_role.arn
+  role       = aws_iam_role.ecs_task_execution_role.name
 }
 
 
