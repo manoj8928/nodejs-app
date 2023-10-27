@@ -5,7 +5,7 @@ resource "aws_ecs_task_definition" "task" {
   memory = var.container_memory
   container_definitions = jsonencode([
     {
-      name  = "${var.app_name}-container"
+      name  = "demo-container"
       image = var.image
       portMappings = [
         {
