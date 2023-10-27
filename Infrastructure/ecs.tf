@@ -85,7 +85,7 @@ resource "aws_ecs_service" "demo_service" {
 #security_groups for alb load_balancer
 
 resource "aws_security_group" "ecs_sg" {
-  vpc_id      = data.aws_vpc.this.id
+  vpc_id      = module.demo_vpc.vpc_id
   name        = "${var.app_name}-app-lb-sg"
   description = "Security Group for ${var.app_name} ALB"
 

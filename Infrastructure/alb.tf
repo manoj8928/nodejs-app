@@ -1,17 +1,8 @@
-# Get VPC id from var.vpc_name
-data "aws_vpc" "this" {
-  filter {
-    name   = "tag:Name"
-    values = [var.app_name]
-  }
-   depends_on = [module.demo_vpc]
-}
-
 # Get subnets ids using filter expression
 data "aws_subnets" "alb" {
   filter {
     name   = "vpc-id"
-    values = [data.aws_vpc.this.id]
+    values = [module.demo_vpc.vpc_id]
   }
 
   filter {
@@ -90,7 +81,7 @@ resource "aws_lb_target_group" "alb_tg" {
     unhealthy_threshold = 2
   }
   target_type = "ip"
-  vpc_id      = data.aws_vpc.this.id
+  vpc_id      = module.demo_vpc.vpc_id
   tags        = local.tags
   depends_on  = [module.demo_vpc]
 }
@@ -98,7 +89,7 @@ resource "aws_lb_target_group" "alb_tg" {
 #security_groups for alb load_balancer
 
 resource "aws_security_group" "alb" {
-  vpc_id      = data.aws_vpc.this.id
+  vpc_id      = module.demo_vpc.vpc_id
   name        = "${var.app_name}-app-lb-sg"
   description = "Security Group for ${var.app_name} ECS"
 
