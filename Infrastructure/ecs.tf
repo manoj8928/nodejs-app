@@ -80,19 +80,19 @@ resource "aws_security_group" "ecs_sg" {
   description = "Security Group for ${var.lb_name}"
 
   egress {
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
     description = "Outbound traffic from AWS VPC"
   }
 
   ingress {
-    from_port   = 3000
-    to_port     = 3000
-    protocol    = "tcp"
+    from_port       = 3000
+    to_port         = 3000
+    protocol        = "tcp"
     security_groups = [aws_security_group.alb.id]
-    description = "Allow traffic from alb"
+    description     = "Allow traffic from alb"
   }
 
   tags = local.tags

@@ -39,7 +39,7 @@ resource "aws_lb" "this" {
       enabled = access_logs.value["enabled"]
     }
   }
-    depends_on = [module.demo_vpc]
+  depends_on = [module.demo_vpc]
 
 }
 
@@ -54,8 +54,8 @@ resource "aws_lb_listener" "http" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.alb_tg.arn
   }
-tags = local.tags
-  }
+  tags = local.tags
+}
 
 #Will comment this since we dont have ssl certificate however recommended for production environment 
 
@@ -90,7 +90,7 @@ resource "aws_lb_target_group" "alb_tg" {
   target_type = "ip"
   vpc_id      = data.aws_vpc.this.id
   tags        = local.tags
-  depends_on = [module.demo_vpc]
+  depends_on  = [module.demo_vpc]
 }
 
 #security_groups for alb load_balancer
@@ -101,9 +101,9 @@ resource "aws_security_group" "alb" {
   description = "Security Group for ${var.lb_name}"
 
   egress {
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
     description = "Outbound traffic from AWS VPC"
   }
@@ -124,6 +124,6 @@ resource "aws_security_group" "alb" {
     description = "Allow traffic from public internet"
   }
 
-  tags = local.tags
+  tags       = local.tags
   depends_on = [module.demo_vpc]
 }

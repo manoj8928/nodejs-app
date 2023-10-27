@@ -5,7 +5,7 @@ variable "app_name" {
 }
 
 variable "region" {
-  default     = "eu-central-1"
+  default = "eu-central-1"
 }
 
 variable "container_memory" {}
@@ -29,7 +29,7 @@ variable "alb_type" {
 variable "cidr" {
   description = "(Required) CIDR used to create VPC (e.g. 10.10.10.10/16)"
   type        = string
-  default    = "10.140.0.0/16"
+  default     = "10.140.0.0/16"
 }
 
 variable "private_subnets" {

@@ -1,8 +1,8 @@
 # Using opensource TF module for AWS VPC Setup
 
 module "demo_vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "5.1.1"
+  source                 = "terraform-aws-modules/vpc/aws"
+  version                = "5.1.1"
   name                   = var.app_name
   cidr                   = var.cidr
   private_subnets        = var.private_subnets
