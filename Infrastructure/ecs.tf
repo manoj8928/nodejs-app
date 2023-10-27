@@ -13,6 +13,14 @@ resource "aws_ecs_task_definition" "task" {
           protocol      = "tcp"
         }
       ]
+           logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          "awslogs-group"         = aws_cloudwatch_log_group.ecs_logs.name
+          "awslogs-region"        = ${data.aws_region.current.name}
+          "awslogs-stream-prefix" = "ecs"
+        }
+      }
     }
   ])
   requires_compatibilities = ["FARGATE"]
@@ -20,6 +28,14 @@ resource "aws_ecs_task_definition" "task" {
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   tags                     = local.tags
 }
+
+#Define cloudwatch loggroup for logging application
+
+resource "aws_cloudwatch_log_group" "ecs_logs" {
+  name = "/ecs/${var.app_name}"
+  retention_in_days = 14
+}
+
 
 # Fetch the private subnet IDs
 data "aws_subnet" "private_subnet1" {
