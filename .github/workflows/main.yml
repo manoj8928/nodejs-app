@@ -24,12 +24,12 @@ jobs:
 
     #- name: Run tests
     #  run: npm test
-    
-    - name: Configure AWS credentials
+
+    - name: Configure AWS credentials #TO make it more secure we should use OIDC method instead of AWS Credentials https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
         aws-region: eu-central-1
 
     - name: Login to Amazon ECR
