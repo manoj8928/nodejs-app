@@ -4,10 +4,6 @@ variable "app_name" {
   default     = "demo"
 }
 
-variable "region" {
-  default = "eu-central-1"
-}
-
 variable "container_memory" {
   description = "(Required) Provide memory for the container to run"
   type        = string
