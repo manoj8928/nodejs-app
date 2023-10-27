@@ -16,10 +16,16 @@ variable "container_cpu" {
   default     = "1024"
 }
 
-variable "image" {
+variable "docker_image" {
   description = "(Required) Provide application image path"
   type        = string
   default     = "manoj1992/nodejsapp"
+}
+
+variable "container_port" {
+  description = "The port the container listens on"
+  type        = number
+  default     = 8080
 }
 
 variable "access_logs_config" {

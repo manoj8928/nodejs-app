@@ -6,10 +6,10 @@ resource "aws_ecs_task_definition" "task" {
   container_definitions = jsonencode([
     {
       name  = "demo-container"
-      image = var.image
+      image = var.docker_image
       portMappings = [
         {
-          containerPort = "3000"
+          containerPort = var.container_port
           protocol      = "tcp"
         }
       ]
