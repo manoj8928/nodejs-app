@@ -77,7 +77,7 @@ resource "aws_lb_target_group" "alb_tg" {
 resource "aws_security_group" "alb" {
   vpc_id      = module.demo_vpc.vpc_id
   name        = "${var.app_name}-app-lb-sg"
-  description = "Security Group for ${var.app_name} ECS"
+  description = "Security Group for ${var.app_name} ALB"
 
   egress {
     from_port   = 0

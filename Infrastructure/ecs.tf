@@ -68,8 +68,8 @@ resource "aws_ecs_service" "demo_service" {
 
 resource "aws_security_group" "ecs_sg" {
   vpc_id      = module.demo_vpc.vpc_id
-  name        = "${var.app_name}-app-lb-sg"
-  description = "Security Group for ${var.app_name} ALB"
+  name        = "${var.app_name}-app-ecs-sg"
+  description = "Security Group for ${var.app_name} ECS"
 
   egress {
     from_port   = 0
