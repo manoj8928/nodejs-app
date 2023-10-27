@@ -10,5 +10,6 @@ module "demo_vpc" {
   single_nat_gateway     = true
   enable_nat_gateway     = true
   one_nat_gateway_per_az = false
+  azs                    = var.azs
   tags                   = local.tags
 }
