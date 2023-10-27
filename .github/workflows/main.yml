@@ -1,28 +1,40 @@
-name: Node.js CI/CD
+name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ develop ]
+    branches:
+      - main
+      - develop  # or whichever branch you want this to run on
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Setup Node.js
+    - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: '14'  # or your preferred version
 
     - name: Install dependencies
       run: npm install
 
-    - name: Test (you can add tests here if you have any)
-      run: echo "No tests specified"
+    - name: Run tests
+      run: npm test
 
-    # Here you can add any other CI steps like linting, testing etc.
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
 
-    # Make sure you have your AWS credentials setup for this step
+    - name: Build, tag, and push Docker image to Amazon ECR
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: demo-app  # replace with your ECR repository name
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
