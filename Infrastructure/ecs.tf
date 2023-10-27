@@ -22,11 +22,12 @@ resource "aws_ecs_task_definition" "task" {
 }
 
 # Fetch VPC ID
-data "aws_vpc" "mkt_admin_panel" {
+data "aws_vpc" "this" {
   filter {
     name   = "tag:Name"
     values = [var.app_name]
   }
+   depends_on = [module.demo_vpc]
 }
 
 # Fetch the private subnet IDs
@@ -35,6 +36,7 @@ data "aws_subnet" "private_subnet1" {
     name   = "tag:Name"
     values = ["${var.app_name}-vpc-private-eu-central-1a"]
   }
+   depends_on = [module.demo_vpc]
 }
 
 data "aws_subnet" "private_subnet2" {
@@ -42,6 +44,7 @@ data "aws_subnet" "private_subnet2" {
     name   = "tag:Name"
     values = ["${var.app_name}-vpc-private-eu-central-1b"]
   }
+   depends_on = [module.demo_vpc]
 }
 
 # Define the ECS service

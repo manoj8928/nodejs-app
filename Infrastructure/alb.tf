@@ -4,6 +4,7 @@ data "aws_vpc" "this" {
     name   = "tag:Name"
     values = [var.app_name]
   }
+   depends_on = [module.demo_vpc]
 }
 
 # Get subnets ids using filter expression
@@ -17,6 +18,7 @@ data "aws_subnets" "alb" {
     name   = "tag:Name"
     values = [var.alb_type == false ? "*public*" : "*private*"]
   }
+   depends_on = [module.demo_vpc]
 }
 
 #Application load balancer for ECS Service
