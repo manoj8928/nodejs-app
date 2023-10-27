@@ -15,7 +15,7 @@ data "aws_subnets" "alb" {
 
   filter {
     name   = "tag:Name"
-    values = [var.is_internal == false ? "*public*" : "*private*"]
+    values = [var.alb_type == false ? "*public*" : "*private*"]
   }
 }
 
@@ -98,7 +98,7 @@ resource "aws_lb_target_group" "alb_tg" {
 resource "aws_security_group" "alb" {
   vpc_id      = data.aws_vpc.this.id
   name        = "${var.app_name}-app-lb-sg"
-  description = "Security Group for ${var.lb_name}"
+  description = "Security Group for ${var.app_name} ECS"
 
   egress {
     from_port   = 0

@@ -25,7 +25,7 @@ resource "aws_ecs_task_definition" "task" {
 data "aws_vpc" "mkt_admin_panel" {
   filter {
     name   = "tag:Name"
-    values = [var.vpc_name]
+    values = [var.app_name]
   }
 }
 

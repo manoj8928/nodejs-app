@@ -22,6 +22,12 @@ variable "image" {
   default     = "manoj1992/nodejsapp"
 }
 
+variable "containerPort" {
+  description = "(Required) Define port on which container will run"
+  type        = string
+  default     = "3000"
+}
+
 variable "access_logs_config" {
   description = "The name of the S3 bucket to store access logs."
   type        = list(map(string))
