@@ -61,6 +61,8 @@ This application uses GitHub Actions to automate its deployment. Here are the st
     Click "New repository secret" and add the following secrets:
     AWS_ACCESS_KEY_ID: Your AWS access key.
     AWS_SECRET_ACCESS_KEY: Your AWS secret access key.
+
+    Note: IAM credentails needs permission to push docker image. to ECR and Deploy Infrastructure
     ```
     These secrets are used by the GitHub Actions workflow to authenticate and push Docker images to ECR, and apply infrastructure changes with Terraform.
 
