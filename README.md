@@ -2,9 +2,9 @@
 This repository contains a Node.js application that interacts with AWS DynamoDB. Here are the steps to set up the project locally using Docker and Docker Compose.
 
 # Prerequisites
-Docker
-Docker Compose
-AWS Credentails (Need need read/write permission to DynamoDB table)
+- Docker
+- Docker Compose
+- AWS Credentails (Need need read/write permission to DynamoDB table)
 
 ## Example APP
 The example Node.js app includes dummy code and tests. We have two main endpoints in this application `/status` which provide status of server is up and running and `/data` which accepts POST request in form of JSON Body.
