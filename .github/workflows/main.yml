@@ -7,7 +7,7 @@ on:
       - develop  # or whichever branch you want this to run on
 
 jobs:
-  build:
+  build-and-push-app:
     runs-on: ubuntu-latest
 
     steps:
@@ -44,4 +44,29 @@ jobs:
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+  
+  deploy-infrastructure:
+    needs: build-and-push-app
+    runs-on: ubuntu-latest
+    environment: 
+      name: Terraform Apply Approval
 
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: eu-central-1
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Initialize Terraform
+      run: terraform init
+      working-directory: Infrastructure/
+
+    - name: Apply Terraform
+      run: terraform apply -auto-approve
+      working-directory: Infrastructure/
