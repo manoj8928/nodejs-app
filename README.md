@@ -28,7 +28,7 @@ This command will start both the Node.js app and DynamoDB. The application will 
 
 # 3. Testing the Application
 
-# a. Health Check Endpoint
+1. Health Check Endpoint
 
 Verify the application is running:   
 
@@ -40,7 +40,7 @@ You should receive a response like:
 ```shell
 {"status":"Up and running!"}
 ```
-# b. Data Endpoint
+2. Data Endpoint
 
 Test the data endpoint with a POST request:
 
