@@ -1,0 +1,21 @@
+# Node.js related
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+*.pem
+
+# Terraform related
+*.tfstate
+*.tfstate.* 
+*.tfvars
+.terraform/
+terraform.tfstate.d/
+
+# Miscellaneous
+.DS_Store
+*.log
+*.bak
+*.swp
+*.temp
+*.tmp

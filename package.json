@@ -1,0 +1,31 @@
+{
+    "name": "node-dynamodb-app",
+    "version": "1.0.0",
+    "description": "A simple Node.js app with DynamoDB integration",
+    "main": "app/index.js",
+    "scripts": {
+      "start": "node index.js",
+      "dev": "nodemon index.js",
+      "test": "mocha app/test/**/*.test.js"
+    },
+    "keywords": [
+      "nodejs",
+      "dynamodb",
+      "aws"
+    ],
+    "author": "Your Name",
+    "license": "ISC",
+    "dependencies": {
+    "aws-sdk": "^2.1040.0",
+    "body-parser": "^1.19.1",
+    "express": "^4.17.3",
+    "uuid": "^8.3.2"
+  },
+    "devDependencies": {
+      "nodemon": "^2.0.14",
+      "mocha": "^9.1.3",
+      "chai": "^4.3.4",
+      "chai-http": "^4.3.0"
+    }
+  }
+  
