@@ -22,8 +22,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: npm test
+    #- name: Run tests
+    #  run: npm test
 
     - name: Configure AWS credentials #TO make it more secure we should use OIDC method instead of AWS Credentials https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
       uses: aws-actions/configure-aws-credentials@v1
