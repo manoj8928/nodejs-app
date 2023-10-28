@@ -55,16 +55,15 @@ This application uses GitHub Actions to automate its deployment. Here are the st
 
 1. Setup AWS Credentials in GitHub Secrets:
 
-    ```shell
-    Navigate to your repository on GitHub.
-    Go to "Settings" -> "Secrets".
-    Click "New repository secret" and add the following secrets:
-    AWS_ACCESS_KEY_ID: Your AWS access key.
-    AWS_SECRET_ACCESS_KEY: Your AWS secret access key.
+Navigate to your repository on GitHub.
+-  Go to "Settings" -> "Secrets".
+-  Click "New repository secret" and add the following secrets:
+-  AWS_ACCESS_KEY_ID: Your AWS access key.
+-  AWS_SECRET_ACCESS_KEY: Your AWS secret access key.
 
-    Note: IAM credentails needs permission to push docker image. to ECR and Deploy Infrastructure
-    ```
-    These secrets are used by the GitHub Actions workflow to authenticate and push Docker images to ECR, and apply infrastructure changes with Terraform.
+Note: IAM credentails needs permission to push docker image. to ECR and Deploy Infrastructure
+ 
+These secrets are used by the GitHub Actions workflow to authenticate and push Docker images to ECR, and apply infrastructure changes with Terraform.
 
 2. Triggering the CI/CD Pipeline:
 
@@ -76,15 +75,15 @@ The pipeline will:
 -  Deploy the infrastructure using Terraform.
 
 3. Monitoring the Workflow:
-
-    Go to the "Actions" tab on your repository to see the progress of the workflow.
-    If any step fails, you can click into the workflow run to view the logs and diagnose the issue.
+ 
+-  Go to the "Actions" tab on your repository to see the progress of the workflow.
+-  If any step fails, you can click into the workflow run to view the logs and diagnose the issue.
 
 4. Manual Approval for Infrastructure Deployment:
 
-    The workflow includes a manual approval step for Terraform changes.
-    When the deployment reaches this step, an administrator will need to review the changes and approve them before the deployment continues.
+-  The workflow includes a manual approval step for Terraform changes.
+-  When the deployment reaches this step, an administrator will need to review the changes and approve them before the deployment continues.
 
 5. Accessing the Deployed Application:
 
-    Once the CI/CD pipeline completes, the application will be accessible through the URL of the Application Load Balancer created by Terraform.
+-  Once the CI/CD pipeline completes, the application will be accessible through the URL of the Application Load Balancer created by Terraform.
