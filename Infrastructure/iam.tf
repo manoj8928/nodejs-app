@@ -25,9 +25,15 @@ resource "aws_iam_role" "ecs_task_execution_role" {
   tags = local.tags
 }
 
-data "aws_iam_policy_document" "dynamodb_demo_policy_doc" {
-  statement {
-    actions = [
+resource "aws_iam_role_policy" "dynamodb_inline_policy" {
+  name = "DynamoDBInlinePolicy"
+  role = aws_iam_role.ecs_task_execution_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action   = [
       "dynamodb:GetItem",
       "dynamodb:PutItem",
       "dynamodb:UpdateItem",
@@ -35,22 +41,10 @@ data "aws_iam_policy_document" "dynamodb_demo_policy_doc" {
       "dynamodb:BatchWriteItem",
       "dynamodb:Query",
       "dynamodb:Scan"
+        ],
+        Effect   = "Allow",
+        Resource = ["arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${var.app_name}"]
+      }
     ]
-
-    resources = ["arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${var.app_name}"]
-  }
+  })
 }
-
-resource "aws_iam_policy" "dynamodb_demo_policy" {
-  name        = "DynamoDBDemoReadWrite"
-  description = "Provides read and write access to the 'demo' DynamoDB table."
-
-  policy = data.aws_iam_policy_document.dynamodb_demo_policy_doc.json
-}
-
-resource "aws_iam_role_policy_attachment" "demo_policy_attachment" {
-  policy_arn = aws_iam_policy.dynamodb_demo_policy.arn
-  role       = aws_iam_role.ecs_task_execution_role.name
-}
-
-
