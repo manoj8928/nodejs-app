@@ -9,7 +9,7 @@ resource "aws_ecs_task_definition" "task" {
       image = var.docker_image
       portMappings = [
         {
-          containerPort = var.container_port
+          containerPort = 3000
           protocol      = "tcp"
         }
       ]
