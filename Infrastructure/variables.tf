@@ -25,7 +25,7 @@ variable "docker_image" {
 variable "container_port" {
   description = "The port the container listens on"
   type        = number
-  default     = 8080
+  default     = 3000
 }
 
 variable "access_logs_config" {

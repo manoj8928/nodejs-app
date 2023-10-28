@@ -67,6 +67,10 @@ jobs:
       run: terraform init
       working-directory: Infrastructure/
 
+    - name: Plan Terraform
+      run: terraform plan
+      working-directory: Infrastructure/
+
     - name: Apply Terraform
       run: terraform apply -auto-approve
       working-directory: Infrastructure/
