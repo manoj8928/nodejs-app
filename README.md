@@ -53,15 +53,15 @@ This command will start both the Node.js app and DynamoDB. The application will 
 
 This project utilizes Mocha as the test framework and Chai for assertions to ensure the functionality and quality of the code.
 
-    To run the tests, follow these steps:
+To run the tests, follow these steps:
 
-    Ensure you have all the dependencies installed:
+1. Ensure you have all the dependencies installed:
 
     ```shell
     npm install
     ```
 
-    Execute the tests:
+2. Execute the tests:
    
     ```shell
     npm test
