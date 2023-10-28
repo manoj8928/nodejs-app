@@ -87,3 +87,59 @@ The pipeline will:
 5. Accessing the Deployed Application:
 
 -  Once the CI/CD pipeline completes, the application will be accessible through the URL of the Application Load Balancer created by Terraform.
+
+# Design decisions
+
+1. Adoption of DynamoDB as the Database Solution:
+
+- NoSQL with Node.js: Our application benefits from a NoSQL database due to its compatibility with Node.js. The asynchronous nature of Node.js pairs seamlessly with NoSQL, enhancing performance during database operations.
+
+- Managed Service Benefits: DynamoDB, an AWS offering, stands out as a premier NoSQL choice. It’s fully managed, scaling automatically to match growing demands. This allows us to focus on application features, rather than database management.
+
+- Operational Ease: DynamoDB takes away routine operational challenges. Tasks like hardware maintenance, software patching, and configuration are automated, freeing our team from manual oversight.
+
+- Why Not MongoDB?: While MongoDB is a potent NoSQL option, AWS doesn't provide a managed MongoDB service akin to DynamoDB. Using DynamoDB reduces additional operational responsibilities that would come with MongoDB.
+
+2. Choosing AWS Fargate for Deployment:
+
+We selected AWS Fargate as our deployment platform primarily for its simplicity and integration capabilities.
+
+- Ease of Use: Fargate provides an intuitive platform that requires minimal setup, allowing us to get our application up and running quickly without managing underlying server infrastructure.
+
+- Fully Managed: As a serverless compute engine for containers, Fargate eliminates the need for manual server configuration or scaling. This translates to reduced operational burdens and a focus on building and refining our application.
+
+- Seamless AWS Integration: Fargate's deep integration with various AWS services, such as CloudWatch, IAM, DynamoDB, and AWS ALB, ensures that we can harness the full power of the AWS ecosystem without complications.
+
+3. CloudWatch for Logging:
+
+Our choice of CloudWatch as the logging solution is rooted in its seamless compatibility within the AWS ecosystem.
+
+- Integrated Solution: CloudWatch provides a native logging service designed for AWS resources, making it a natural fit for our infrastructure.
+
+- Effortless Integration: With AWS Fargate, the integration is almost automatic. This ensures that we capture relevant logs without additional configurations or interventions.
+
+- Centralized Monitoring: Beyond just logging, CloudWatch offers monitoring, alarming, and dashboards. This gives us a holistic view of our application's performance and health.
+
+4. Dockerizing the Application:
+
+The decision to Dockerize our application was driven by the need for consistent environments, scalability, and seamless deployments.
+
+- Consistency Across Environments: Docker ensures that the application runs the same way, regardless of where the container is launched - be it a developer's local machine or in the cloud.
+
+- Seamless Deployment with AWS Fargate: AWS Fargate is purpose-built for running containerized applications. By Dockerizing our app, we tap into Fargate's full potential, gaining benefits like automated scaling, managed orchestration, and deep integration with other AWS services.
+
+- Simplicity & Portability: Docker abstracts away underlying system differences. This means our development and production environments can mirror each other closely, minimizing "it works on my machine" issues.
+
+5. Terraform for Infrastructure Management:
+
+The choice to use Terraform as our primary Infrastructure as Code (IaC) tool was grounded in its versatility, community support, and interoperability.
+
+- Declarative Code: Terraform's declarative syntax allows for clear and straightforward representation of infrastructure components. This makes it easier to review, understand, and modify.
+
+- Rich Open-Source Ecosystem: The vast collection of open-source modules available for Terraform accelerates development by providing pre-written templates for common infrastructure patterns.
+
+- Provider Agnosticism: While our primary cloud provider is AWS, Terraform's broad support for multiple cloud providers ensures our infrastructure code remains portable, should we decide to adopt a multi-cloud strategy in the future.
+
+- State Management: Terraform's state management capabilities provide a real-time snapshot of infrastructure resources, aiding in tracking and managing changes effectively.
+
+- Rapid Iterations: With CI/CD, we can deploy infrastructure changes rapidly, ensuring that our application's infrastructure stays agile and responsive to business needs.
