@@ -1,4 +1,4 @@
-# Node.js App with DynamoDB Integration
+# DynamoDB-Backed Node.js App on AWS Fargate
 This repository contains a Node.js application that interacts with AWS DynamoDB. Here are the steps to set up the project locally using Docker and Docker Compose.
 
 # Prerequisites
