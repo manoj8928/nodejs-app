@@ -49,6 +49,25 @@ This command will start both the Node.js app and DynamoDB. The application will 
     ```
     This will send data to be stored in the local DynamoDB instance. A successful response will include a unique ID for the data item.
 
+4. Runing tests
+
+This project utilizes Mocha as the test framework and Chai for assertions to ensure the functionality and quality of the code.
+
+    To run the tests, follow these steps:
+
+    Ensure you have all the dependencies installed:
+
+    ```shell
+    npm install
+    ```
+
+    Execute the tests:
+   
+    ```shell
+    npm test
+    ```
+These tests are crucial in ensuring the application's reliability and robustness. It is recommended to run them after making any significant changes to the codebase.
+
 # Deploying the Application
 
 This application uses GitHub Actions to automate its deployment. Here are the steps to deploy the application using the provided CI/CD pipeline:
