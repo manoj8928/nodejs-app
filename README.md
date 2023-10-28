@@ -67,13 +67,12 @@ This application uses GitHub Actions to automate its deployment. Here are the st
 2. Triggering the CI/CD Pipeline:
 
 Any push to branches will automatically trigger the CI/CD pipeline.
-    ```shell
-    The pipeline will:
-        Checkout the code.
-        Install Node.js dependencies.
-        Build and push the Docker image to AWS ECR.
-        Deploy the infrastructure using Terraform.
-    ```
+The pipeline will:
+-  Checkout the code.
+-  Install Node.js dependencies.
+-  Build and push the Docker image to AWS ECR.
+-  Deploy the infrastructure using Terraform.
+
 3. Monitoring the Workflow:
 
     Go to the "Actions" tab on your repository to see the progress of the workflow.
