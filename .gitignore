@@ -19,3 +19,7 @@ terraform.tfstate.d/
 *.swp
 *.temp
 *.tmp
+
+# AWS Credentials
+~/.aws/credentials
+~/.aws/config
