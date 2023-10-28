@@ -3,12 +3,21 @@ const AWS = require('aws-sdk');
 const router = express.Router();
 const { v4: uuidv4 } = require('uuid');
 
-// Initialize DynamoDB client
-AWS.config.update({
+// Update AWS configuration based on environment
+const awsConfig = {
     region: "eu-central-1"  // Adjust based on your region
- });
+};
 
-//const dynamoDB = new AWS.DynamoDB.DocumentClient();
+// If the DYNAMODB_ENDPOINT environment variable is set, use it (for local development)
+if (process.env.DYNAMODB_ENDPOINT) {
+    awsConfig.endpoint = process.env.DYNAMODB_ENDPOINT;
+    awsConfig.credentials = {
+        accessKeyId: 'dummy', // Use dummy credentials for local development
+        secretAccessKey: 'dummy'
+    };
+}
+
+AWS.config.update(awsConfig);
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
@@ -37,4 +46,5 @@ router.post('/data', async (req, res) => {
 });
 
 module.exports = router;
+
 
